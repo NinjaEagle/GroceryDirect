@@ -9,7 +9,7 @@ export default function App() {
     <UtilityThemeProvider theme={theme}>
     <View style={styles.container}>
       <Text>Wassup</Text>
-      <Text>Sell this</Text>
+      <Text>Welcome to our ecommerce site</Text>
     </View>
     </UtilityThemeProvider>
   );
