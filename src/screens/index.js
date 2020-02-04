@@ -1,5 +1,8 @@
-import {createStackNavigator, createSwitchNavigator, createBottomTabNavigator} from 'react-navigation-stack';
+import { createSwitchNavigator} from 'react-navigation';
+import{createStackNavigator} from 'react-navigation-stack';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
 import React, {Component} from 'react';
+import { images } from '../constants/images';
 
 const AuthNavigator = createStackNavigator (
     {
@@ -11,19 +14,21 @@ const AuthNavigator = createStackNavigator (
 
 const TabNavigator = createBottomTabNavigator({
     Home: {
-    getScreen: () => require('./HomeScreen').default,
-}});
+        getScreen: () => require('./HomeScreen').default,
+    }
+});
 
 const MainNavigator = createStackNavigator({
     Tab: TabNavigator
 })
 
-const AppNavigator = createSwitchNavigator({
-    Splash: {
-        getScreen: () => require('./SplashScreen').default,
-    },
-    Auth: AuthNavigator,
-    Main: MainNavigator,
+const AppNavigator = createSwitchNavigator(
+    {
+        Splash: {
+            getScreen: () => require('./SplashScreen').default,
+        },
+        Auth: AuthNavigator,
+        Main: MainNavigator,
     },
     {
         initialRouteName: 'Splash',
@@ -34,9 +39,10 @@ const AppNavigator = createSwitchNavigator({
 class Navigation extends Component {
     state ={
 
-    };
+    }
+
     render(){
-        return <AppNavigator />;
+        return( <AppNavigator />);
     }
 }
 

@@ -51,6 +51,7 @@ const theme = {
       md: 18,
       lg: 20,
       xl: 24,
+      "2xl": 32
     },
     weight: {
       light: '200',
