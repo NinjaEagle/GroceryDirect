@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 22718,
-  "expoServerNgrokUrl": "https://a2-ikg.anonymous.ecommercestore.exp.direct",
-  "packagerNgrokUrl": "https://packager.a2-ikg.anonymous.ecommercestore.exp.direct",
-  "ngrokPid": 22728
+  "packagerPort": 19003,
+  "packagerPid": 11300,
+  "expoServerNgrokUrl": "https://if-qp3.anonymous.ecommercestore.exp.direct",
+  "packagerNgrokUrl": "https://packager.if-qp3.anonymous.ecommercestore.exp.direct",
+  "ngrokPid": 11321
 }
