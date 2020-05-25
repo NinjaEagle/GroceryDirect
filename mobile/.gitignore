@@ -1,3 +1,12 @@
 node_modules/
 # client keys
 app.json
+
+# ignore a file type
+*.json
+
+# add an exception using ! to the preceding rule
+!package.json
+
+.expo/*
+npm-debug.*
