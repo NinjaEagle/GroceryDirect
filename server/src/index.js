@@ -1,6 +1,7 @@
 import express from 'express'
 
 import middlewaresConfig from './config/middlewares'
+import './config/db'
 const app = express()
 
 middlewaresConfig(app)
