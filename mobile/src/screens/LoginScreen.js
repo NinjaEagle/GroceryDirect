@@ -33,6 +33,7 @@ class LoginScreen extends Component {
 	onGooglePress = async () => {
 		try {
 			const token = await GoogleApi.loginAsync()
+			console.log(token)
 		} catch (error) {
 			console.log('error', error)
 		}
@@ -40,6 +41,7 @@ class LoginScreen extends Component {
 	onFacebookPress = async () => {
 		try {
 			const token = await FacebookApi.loginAsync()
+			console.log(token)
 		} catch (error) {
 			console.log('error', error)
 		}

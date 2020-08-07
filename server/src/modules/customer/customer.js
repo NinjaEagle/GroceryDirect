@@ -4,6 +4,7 @@ import { buildCustomerInfo } from './buildCustomerInfo'
 export const getOrCreateCustomer = async (info, providerName) => {
 	const customerInfo = buildCustomerInfo(info, providerName)
 
+	console.log(info)
 	try {
 		const _customer = await Customer.findOne({ email: customerInfo.email })
 
@@ -14,6 +15,7 @@ export const getOrCreateCustomer = async (info, providerName) => {
 				...userInfo,
 				provider: [provider],
 			})
+
 			return customer
 		}
 
@@ -22,7 +24,7 @@ export const getOrCreateCustomer = async (info, providerName) => {
 				el.uid === customerInfo.provider.uid &&
 				el.type === customerInfo.provider.type
 		)
-		// if provider exists is true return the customer found
+
 		if (providerExist) {
 			return _customer
 		}

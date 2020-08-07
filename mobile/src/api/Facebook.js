@@ -10,10 +10,7 @@ const loginAsync = async () => {
 			Constants.manifest.facebookDisplayName
 		)
 		// Facebook.initializeAsync(appId: string | undefined, appName: string | undefined): Promise<void>
-		const {
-			type,
-			token,
-		} = await Facebook.logInWithReadPermissionsAsync(
+		const { type, token } = await Facebook.logInWithReadPermissionsAsync(
 			Constants.manifest.facebookAppId,
 			{ permissions }
 		)

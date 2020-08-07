@@ -9,6 +9,7 @@ export const buildCustomerInfo = (info, providerName) => {
 			type: '',
 		},
 	}
+	console.log(info)
 
 	if (providerName === 'GOOGLE') {
 		user.provider.uid = info.id

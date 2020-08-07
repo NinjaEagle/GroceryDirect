@@ -11,20 +11,25 @@ export const create = async (req, res) => {
 		token: Yup.string().required(),
 		provider: Yup.string().oneOf(PROVIDER_ENUM).required(),
 	})
+
 	try {
 		await bodySchema.validate({ token, provider })
+
 		let data
+
 		if (provider === 'FACEBOOK') {
 			data = await AuthProvider.Facebook.authAsync(token)
+			console.log(data)
 		} else if (provider === 'GOOGLE') {
 			data = await AuthProvider.Google.authAsync(token)
-			console.log('DATA HERE')
 		} else {
 			res.sendStatus(400)
 		}
+
 		const customer = await getOrCreateCustomer(data, provider)
+
 		res.status(200).json(customer)
 	} catch (error) {
-		res.status(400).json({ message: error.message || 'no succeess' })
+		res.status(400).json({ message: error.message })
 	}
 }

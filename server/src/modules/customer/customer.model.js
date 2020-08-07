@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+
 export const PROVIDER_ENUM = ['FACEBOOK', 'GOOGLE']
 
 const CustomerSchema = new Schema(
@@ -8,6 +9,7 @@ const CustomerSchema = new Schema(
 		email: {
 			type: String,
 			required: true,
+			unique: true,
 		},
 		avatarUrl: String,
 		provider: [
@@ -19,5 +21,7 @@ const CustomerSchema = new Schema(
 	},
 	{ timestamps: true }
 )
+
 CustomerSchema.index({ email: 1 })
+
 export default mongoose.model('Customer', CustomerSchema)
