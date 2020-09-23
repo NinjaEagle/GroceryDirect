@@ -15,6 +15,7 @@ const createToken = (user) => {
 		id: user._id,
 	}
 
+	// jwt signature and get token
 	return jwt.sign(payload, JWT_SECRET, JWT_OPTS)
 }
 

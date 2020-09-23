@@ -4,22 +4,29 @@ import { AuthServices } from '../../services/Auth'
 
 export const customerAuth = async (req, res, next) => {
 	const token = AuthServices.getTokenFromHeaders(req)
+
 	if (!token) {
 		req.user = null
+
 		return res.sendStatus(401)
 	}
+
 	const customer = await Customer.findById(token.id)
+
 	if (!customer) {
 		req.user = null
+
 		return res.sendStatus(401)
 	}
+
 	req.user = customer
+
 	return next()
 }
+
 export const getOrCreateCustomer = async (info, providerName) => {
 	const customerInfo = buildCustomerInfo(info, providerName)
 
-	console.log(info)
 	try {
 		const _customer = await Customer.findOne({ email: customerInfo.email })
 
@@ -49,6 +56,20 @@ export const getOrCreateCustomer = async (info, providerName) => {
 		await _customer.save()
 
 		return _customer
+	} catch (error) {
+		throw error
+	}
+}
+
+export const me = async (userId) => {
+	try {
+		const user = await Customer.findById(userId)
+
+		if (!user) {
+			throw new Error('User not exist')
+		}
+
+		return user
 	} catch (error) {
 		throw error
 	}
