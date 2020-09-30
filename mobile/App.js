@@ -1,7 +1,6 @@
 import React from 'react'
 import { ActivityIndicator } from 'react-native'
 import { UtilityThemeProvider, Box } from 'react-native-design-utility'
-
 import Navigation from './src/screens'
 import { images } from './src/constants/images'
 import { cacheImages } from './src/utils/cacheImages'

@@ -5,8 +5,11 @@ import OnboardingLogo from '../commons/OnboardingLogo'
 import LoginButton from '../commons/LoginButton'
 import { FacebookApi } from '../api/Facebook'
 import { GoogleApi } from '../api/Google'
+import { inject } from 'mobx-react/native'
 
 const BoxAnimated = Animated.createAnimatedComponent(Box)
+
+@inject('currentUser')
 class LoginScreen extends Component {
 	state = {
 		opacity: new Animated.Value(0),
@@ -33,7 +36,7 @@ class LoginScreen extends Component {
 	onGooglePress = async () => {
 		try {
 			const token = await GoogleApi.loginAsync()
-			console.log(token)
+			await this.props.currentUser.login(token, 'GOOGLE')
 		} catch (error) {
 			console.log('error', error)
 		}
@@ -41,7 +44,6 @@ class LoginScreen extends Component {
 	onFacebookPress = async () => {
 		try {
 			const token = await FacebookApi.loginAsync()
-			console.log(token)
 		} catch (error) {
 			console.log('error', error)
 		}
