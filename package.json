@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "babel-plugin-transform-decorators-legacy": "1.3.5"
+  },
+  "devDependencies": {
+    "react-devtools": "^4.8.2"
+  }
+}

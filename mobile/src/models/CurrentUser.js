@@ -36,13 +36,12 @@ export const CurrentUser = types
 		}),
 		saveToken: flow(function* (token) {
 			try {
-				// console.log('saveToken')
 				yield AsyncStorage.setItem(TOKEN_KEY, token)
 			} catch (error) {
 				console.log('error', error)
 			}
 		}),
-		getUserInfo: flow(function* (token) {
+		getUserInfo: flow(function* () {
 			try {
 				if (self.authToken) {
 					const res = yield customersApi
@@ -51,7 +50,6 @@ export const CurrentUser = types
 						.get()
 						.json()
 					self.info = res
-				} else {
 					NavigationService.navigate('Main')
 				}
 			} catch (error) {
