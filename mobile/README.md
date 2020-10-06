@@ -5,4 +5,4 @@ React Navigation Tabs
 
 ## Installation
 
-1. Make sure to 
+1. Make sure to

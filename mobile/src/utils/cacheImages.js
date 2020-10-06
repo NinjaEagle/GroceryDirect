@@ -1,5 +1,5 @@
-import { Asset } from 'expo-asset'
 import { Image } from 'react-native'
+import { Asset } from 'expo-asset'
 
 export function cacheImages(images) {
 	return images.map((image) => {

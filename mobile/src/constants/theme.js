@@ -6,7 +6,7 @@ const color = {
 	greyDark: '#757575',
 	grey: '#9e9e9e',
 	greyLight: '#bdbdbd',
-	greyLighter: '#e0e0e0',
+	greyLighter: '#F5F5F5',
 	greyLightest: '#eeeeee',
 	white: '#fff',
 
