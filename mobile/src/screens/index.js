@@ -35,6 +35,9 @@ const HomeStack = createStackNavigator(
 		Home: {
 			getScreen: () => require('./HomeScreen').default,
 		},
+		Category: {
+			getScreen: () => require('./CategoryScreen').default,
+		},
 	},
 	{
 		navigationOptions: { ...primaryHeader },
