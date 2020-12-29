@@ -19,14 +19,14 @@ const BoxAnimated = Animated.createAnimatedComponent(Box)
 class ProductCard extends Component {
 	state = {
 		isHover: false,
-		qty: 1,
+		qty: 0,
 		cardOpacity: new Animated.Value(1),
 		qtyCardOpacity: new Animated.Value(0),
 	}
 
 	handlePlusPress = () => {
 		this.fadeIn()
-		this.setState({ isHover: true })
+		this.setState({ isHover: true, qty: this.state.qty+1 })
 	}
 
 	handleInc = () => {
@@ -109,8 +109,8 @@ class ProductCard extends Component {
 								borderWidth: 1,
 							}}
 							center
-							bg={qty > 1 ? 'green' : 'white'}>
-							{qty > 1 ? (
+							bg={qty > 0 ? 'green' : 'white'}>
+							{qty > 0 ? (
 								<Text color='white' size='sm'>
 									{qty}
 								</Text>

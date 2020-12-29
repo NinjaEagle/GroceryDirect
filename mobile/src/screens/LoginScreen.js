@@ -9,7 +9,7 @@ import { inject } from 'mobx-react/native'
 
 const BoxAnimated = Animated.createAnimatedComponent(Box)
 
-@inject('currentUser')
+@inject('authStore')
 class LoginScreen extends Component {
 	state = {
 		opacity: new Animated.Value(0),
@@ -36,7 +36,7 @@ class LoginScreen extends Component {
 	onGooglePress = async () => {
 		try {
 			const token = await GoogleApi.loginAsync()
-			await this.props.currentUser.login(token, 'GOOGLE')
+			await this.props.authStore.login(token, 'GOOGLE')
 		} catch (error) {
 			console.log('error', error)
 		}
@@ -44,6 +44,7 @@ class LoginScreen extends Component {
 	onFacebookPress = async () => {
 		try {
 			const token = await FacebookApi.loginAsync()
+			await this.props.authStore.login(token, 'FACEBOOK')
 		} catch (error) {
 			console.log('error', error)
 		}

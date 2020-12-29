@@ -12,17 +12,17 @@ class CategoryCard extends PureComponent {
 		const { title, image } = this.props
 		return (
 			<TouchableOpacity onPress={this.handlePress} style={styles.button}>
-				<Box center f={1}>
-					{image && (
-						<Box center mb='sm'>
-							<Image source={image} />
-						</Box>
-					)}
-					<Box center>
-						<Text size='sm' center capitalizeEach color='greyDarker'>
-							{title}
-						</Text>
-					</Box>
+       		<Box center f={1}>
+          		{image && (
+            <Box center mb="sm">
+              <Image source={image} />
+            </Box>
+          		)}
+			<Box center>
+				<Text size="sm" center capitalizeEach color="greyDarker">
+				{title}
+				</Text>	
+			</Box>
 				</Box>
 			</TouchableOpacity>
 		)

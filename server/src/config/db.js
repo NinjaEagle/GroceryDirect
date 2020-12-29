@@ -5,7 +5,7 @@ import { DB_URL } from '../constants'
 mongoose.set('debug', true)
 
 try {
-	mongoose.connect(DB_URL, { useNewURLParser: true })
+	mongoose.connect(DB_URL, { useNewUrlParser: true })
 } catch (err) {
 	mongoose.createConnection(DB_URL, {
 		useNewURLParser: true,
