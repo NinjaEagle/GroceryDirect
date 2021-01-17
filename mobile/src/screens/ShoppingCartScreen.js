@@ -13,29 +13,35 @@ class ShoppingCartScreen extends Component {
 		title: "My Cart",
 	};
 	state = {};
+
 	renderItem = ({ item }) => <CartItem product={item} />;
 
 	keyExtractor = (item) => String(item.id);
 
 	renderList = () => {
-		const { products } = this.props.shoppingCartStore;
+		const { shoppingCartStore } = this.props;
 
-		if (products.length === 0) {
+		if (shoppingCartStore.totalProducts === 0) {
 			return (
 				<Box center f={1}>
 					<Text>Cart Empty</Text>
 				</Box>
 			);
 		}
+
+		console.log("products", shoppingCartStore.products);
+		console.log("productsList", shoppingCartStore.productsList);
+
 		return (
 			<FlatList
-				data={products}
+				data={shoppingCartStore.productsList}
 				renderItem={this.renderItem}
 				keyExtractor={this.keyExtractor}
-				extraData={products}
+				extraData={shoppingCartStore}
 			/>
 		);
 	};
+
 	renderCheckoutBtn = () => {
 		const { shoppingCartStore } = this.props;
 
@@ -68,6 +74,7 @@ class ShoppingCartScreen extends Component {
 			</Box>
 		);
 	};
+
 	render() {
 		return (
 			<Box f={1}>
