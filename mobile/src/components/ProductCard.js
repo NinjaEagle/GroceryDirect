@@ -1,52 +1,55 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import {
 	Image,
 	StyleSheet,
 	TouchableOpacity,
 	TouchableWithoutFeedback,
 	Animated,
-} from 'react-native'
-import { Box, Text } from 'react-native-design-utility'
-import { Feather } from '@expo/vector-icons'
+} from "react-native";
+import { Box, Text } from "react-native-design-utility";
+import { Feather } from "@expo/vector-icons";
+import { observer } from "mobx-react/native";
+import { productImgs } from "../constants/images";
+import { theme } from "../constants/theme";
 
-import { productImgs } from '../constants/images'
-import { theme } from '../constants/theme'
+const ANIM_DURATION = 200;
 
-const ANIM_DURATION = 200
-
-const BoxAnimated = Animated.createAnimatedComponent(Box)
-
+const BoxAnimated = Animated.createAnimatedComponent(Box);
+@observer
 class ProductCard extends Component {
 	state = {
 		isHover: false,
 		qty: 0,
 		cardOpacity: new Animated.Value(1),
 		qtyCardOpacity: new Animated.Value(0),
-	}
+	};
 
 	handlePlusPress = () => {
-		this.fadeIn()
-		this.setState({ isHover: true, qty: this.state.qty+1 })
-	}
+		this.fadeIn();
+		this.setState({ isHover: true, qty: this.state.qty + 1 });
+		if (this.props.product.cartQty === 0) {
+			this.props.product.addToCart();
+		}
+	};
 
 	handleInc = () => {
-		this.setState((s) => ({
-			qty: s.qty + 1,
-		}))
-	}
+		this.props.product.incCartQty();
+	};
 
 	handleDec = () => {
-		this.setState((s) => ({
-			qty: s.qty - 1,
-		}))
-	}
+		this.props.product.decCartQty();
+	};
 
 	handleClose = () => {
-		this.fadeOut()
+		this.fadeOut();
 		this.setState({
 			isHover: false,
-		})
-	}
+		});
+	};
+	handleRemove = () => {
+		this.handleClose();
+		this.props.product.removeFromCart();
+	};
 
 	fadeIn = () => {
 		Animated.parallel([
@@ -58,8 +61,8 @@ class ProductCard extends Component {
 				toValue: 0.4,
 				duration: ANIM_DURATION,
 			}).start(),
-		])
-	}
+		]);
+	};
 
 	fadeOut = () => {
 		Animated.parallel([
@@ -71,11 +74,12 @@ class ProductCard extends Component {
 				toValue: 1,
 				duration: ANIM_DURATION,
 			}).start(),
-		])
-	}
+		]);
+	};
 
 	render() {
-		const { isHover, qty, cardOpacity, qtyCardOpacity } = this.state
+		const { isHover, cardOpacity, qtyCardOpacity } = this.state;
+		const { product } = this.props;
 		return (
 			<Box bg='white' w={150} p='sm' position='relative'>
 				<TouchableWithoutFeedback onPress={this.handleClose}>
@@ -84,24 +88,28 @@ class ProductCard extends Component {
 							<Image
 								style={styles.img}
 								resizeMode='contain'
-								source={productImgs.apple}
+								source={product.imageUrl}
 							/>
 						</Box>
 						<Box>
 							<Text left size='sm' bold>
-								$1.19 each
+								${product.price} each
 							</Text>
 							<Text left size='xs'>
-								Red Apple
+								{product.name}
 							</Text>
 							<Text left size='xs' color='greyLight'>
-								At $10.12/kg
+								At ${product.kgPrice.toFixed(2)}
+								/kg
 							</Text>
 						</Box>
 					</BoxAnimated>
 				</TouchableWithoutFeedback>
 				{!isHover && (
-					<TouchableOpacity onPress={this.handlePlusPress} style={styles.plusBtn}>
+					<TouchableOpacity
+						onPress={this.handlePlusPress}
+						style={styles.plusBtn}
+					>
 						<Box
 							circle={25}
 							style={{
@@ -109,10 +117,11 @@ class ProductCard extends Component {
 								borderWidth: 1,
 							}}
 							center
-							bg={qty > 0 ? 'green' : 'white'}>
-							{qty > 0 ? (
+							bg={product.cartQty > 0 ? "green" : "white"}
+						>
+							{product.cartQty > 0 ? (
 								<Text color='white' size='sm'>
-									{qty}
+									{product.cartQty}
 								</Text>
 							) : (
 								<Feather name='plus' size={15} color={theme.color.green} />
@@ -127,18 +136,19 @@ class ProductCard extends Component {
 						position='absolute'
 						style={{ top: 10, right: 10, left: 10, zIndex: 99 }}
 						radius={6}
-						o={qtyCardOpacity}>
+						o={qtyCardOpacity}
+					>
 						<Box dir='row' align='center' justify='between' p='xs'>
-							{qty > 1 ? (
+							{product.cartQty > 1 ? (
 								<TouchableOpacity onPress={this.handleDec}>
 									<Feather name='minus' color={theme.color.green} size={20} />
 								</TouchableOpacity>
 							) : (
-								<TouchableOpacity onPress={this.handleClose}>
+								<TouchableOpacity onPress={this.handleRemove}>
 									<Feather name='trash-2' color={theme.color.green} size={20} />
 								</TouchableOpacity>
 							)}
-							<Text>{qty}</Text>
+							<Text>{product.cartQty}</Text>
 							<TouchableOpacity onPress={this.handleInc}>
 								<Feather name='plus' color={theme.color.green} size={20} />
 							</TouchableOpacity>
@@ -146,7 +156,7 @@ class ProductCard extends Component {
 					</BoxAnimated>
 				)}
 			</Box>
-		)
+		);
 	}
 }
 
@@ -158,8 +168,8 @@ const styles = StyleSheet.create({
 	plusBtn: {
 		top: 10,
 		right: 5,
-		position: 'absolute',
+		position: "absolute",
 	},
-})
+});
 
-export default ProductCard
+export default ProductCard;

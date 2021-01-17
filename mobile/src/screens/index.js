@@ -7,6 +7,7 @@ import React, { Component } from 'react'
 import { NavigationService } from '../api/NavigationService'
 import { theme } from '../constants/theme'
 import TabBar from '../components/TabBar'
+import ShoppingCartIcon from '../components/ShoppingCartIcon';
 
 const primaryHeader = {
 	headerStyle: {
@@ -40,7 +41,7 @@ const HomeStack = createStackNavigator(
 		},
 	},
 	{
-		navigationOptions: { ...primaryHeader },
+		navigationOptions: { ...primaryHeader, headerRight: <ShoppingCartIcon /> },
 	}
 )
 
@@ -62,9 +63,21 @@ const TabNavigator = createBottomTabNavigator(
 	}
 )
 
+const ShoppingCartNavigator = createStackNavigator({
+	ShoppingCart: {
+	  getScreen: () => require('./ShoppingCartScreen').default,
+	  navigationOptions: {
+		headerStyle: {
+		  backgroundColor: theme.color.white,
+		},
+	  },
+	},
+  });
+
 const MainNavigator = createStackNavigator(
 	{
 		Tab: TabNavigator,
+		ShoppingCart: ShoppingCartNavigator
 	},
 	{
 		navigationOptions: {
