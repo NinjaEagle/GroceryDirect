@@ -1,6 +1,8 @@
 import { types } from "mobx-state-tree";
 
 import { store } from "../stores";
+// making instance of a store here may result in uninitialized value
+// only use this store to create actions
 
 export const ProductModel = types
 	.model("ProductModel", {

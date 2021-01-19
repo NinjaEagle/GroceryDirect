@@ -1,13 +1,14 @@
 import {
+	createStackNavigator,
 	createSwitchNavigator,
 	createBottomTabNavigator,
-	createStackNavigator,
-} from 'react-navigation'
-import React, { Component } from 'react'
-import { NavigationService } from '../api/NavigationService'
-import { theme } from '../constants/theme'
-import TabBar from '../components/TabBar'
-import ShoppingCartIcon from '../components/ShoppingCartIcon';
+} from "react-navigation";
+import React, { Component } from "react";
+
+import { NavigationService } from "../api/NavigationService";
+import { theme } from "../constants/theme";
+import TabBar from "../components/TabBar";
+import ShoppingCartIcon from "../components/ShoppingCartIcon";
 
 const primaryHeader = {
 	headerStyle: {
@@ -15,14 +16,14 @@ const primaryHeader = {
 	},
 	headerTintColor: theme.color.white,
 	headerTitleStyle: {
-		fontWeight: '400',
+		fontWeight: "400",
 	},
-}
+};
 
 const AuthNavigator = createStackNavigator(
 	{
 		Login: {
-			getScreen: () => require('./LoginScreen').default,
+			getScreen: () => require("./LoginScreen").default,
 		},
 	},
 	{
@@ -30,80 +31,124 @@ const AuthNavigator = createStackNavigator(
 			header: null,
 		},
 	}
-)
+);
+
+const ShoppingCartNavigator = createStackNavigator({
+	ShoppingCart: {
+		getScreen: () => require("./ShoppingCartScreen").default,
+		navigationOptions: {
+			headerStyle: {
+				backgroundColor: theme.color.white,
+			},
+		},
+	},
+});
+
+const ProfileStack = createStackNavigator(
+	{
+		Profile: {
+			getScreen: () => require("./ProfileScreen").default,
+		},
+		Settings: {
+			getScreen: () => require("./SettingsScreen").default,
+		},
+	},
+	{
+		navigationOptions: {
+			headerTitleStyle: {
+				fontWeight: "400",
+			},
+		},
+	}
+);
+
 const HomeStack = createStackNavigator(
 	{
 		Home: {
-			getScreen: () => require('./HomeScreen').default,
+			getScreen: () => require("./HomeScreen").default,
 		},
 		Category: {
-			getScreen: () => require('./CategoryScreen').default,
+			getScreen: () => require("./CategoryScreen").default,
+		},
+		ShoppingCart: {
+			screen: ShoppingCartNavigator,
+			navigationOptions: {
+				header: null,
+			},
 		},
 	},
 	{
 		navigationOptions: { ...primaryHeader, headerRight: <ShoppingCartIcon /> },
 	}
-)
+);
+
+HomeStack.navigationOptions = ({ navigation }) => {
+	let tabBarVisible = true;
+
+	console.log("navigation", navigation);
+
+	if (
+		NavigationService.getCurrentRouteName(navigation.state) === "ShoppingCart"
+	) {
+		tabBarVisible = false;
+	}
+
+	return {
+		tabBarVisible,
+	};
+};
 
 const TabNavigator = createBottomTabNavigator(
 	{
 		Home: HomeStack,
 		List: {
-			getScreen: () => require('./ListScreen').default,
+			getScreen: () => require("./ListScreen").default,
 		},
-		Store: {
-			getScreen: () => require('./StoresScreen').default,
+		Stores: {
+			getScreen: () => require("./StoresScreen").default,
 		},
 		Order: {
-			getScreen: () => require('./OrderScreen').default,
+			getScreen: () => require("./OrderScreen").default,
 		},
 	},
 	{
 		tabBarComponent: (props) => <TabBar {...props} />,
 	}
-)
-
-const ShoppingCartNavigator = createStackNavigator({
-	ShoppingCart: {
-	  getScreen: () => require('./ShoppingCartScreen').default,
-	  navigationOptions: {
-		headerStyle: {
-		  backgroundColor: theme.color.white,
-		},
-	  },
-	},
-  });
+);
 
 const MainNavigator = createStackNavigator(
 	{
 		Tab: TabNavigator,
-		ShoppingCart: ShoppingCartNavigator
+		Profile: ProfileStack,
 	},
 	{
+		mode: "modal",
 		navigationOptions: {
 			header: null,
 		},
 	}
-)
+);
 
 const AppNavigator = createSwitchNavigator(
 	{
 		Splash: {
-			getScreen: () => require('./SplashScreen').default,
+			getScreen: () => require("./SplashScreen").default,
 		},
 		Auth: AuthNavigator,
 		Main: MainNavigator,
 	},
 	{
-		intialRouteName: 'Splash',
+		initialRouteName: "Splash",
 	}
-)
+);
 
 class Navigation extends Component {
-	state = {}
+	state = {};
 	render() {
-		return <AppNavigator ref={(r) => NavigationService.setTopLevelNavigator(r)} />
+		return (
+			<AppNavigator ref={(r) => NavigationService.setTopLevelNavigator(r)} />
+		);
 	}
 }
 
-export default Navigation
+export default Navigation;

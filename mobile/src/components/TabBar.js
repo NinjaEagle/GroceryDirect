@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import { Box } from 'react-native-design-utility'
-import TabItem from './TabItem'
+import React, { Component } from "react";
+import { Box } from "react-native-design-utility";
+import TabItem from "./TabItem";
 
 class TabBar extends Component {
 	render() {
-		const { navigation } = this.props
+		const { navigation } = this.props;
 
-		const { routes, index } = navigation.state
+		const { routes, index } = navigation.state;
 
 		return (
-			<Box h={60} bg='white' dir='row' shadow={0}>
+			<Box h={70} bg='white' dir='row' shadow={0}>
 				{routes.map((route, i) => {
 					return (
 						<TabItem
@@ -18,11 +18,11 @@ class TabBar extends Component {
 							{...route}
 							isActive={index === i}
 						/>
-					)
+					);
 				})}
 			</Box>
-		)
+		);
 	}
 }
 
-export default TabBar
+export default TabBar;
