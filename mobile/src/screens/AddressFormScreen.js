@@ -10,9 +10,7 @@ import { theme } from "../constants/theme";
 class AddressFormScreen extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: "Address",
-		headerLeft: (
-			<CloseBtn left size={25} onPress={() => navigation.goBack(null)} />
-		),
+		headerLeft: <CloseBtn left size={25} onPress={() => navigation.goBack(null)} />,
 	});
 	state = {};
 	render() {

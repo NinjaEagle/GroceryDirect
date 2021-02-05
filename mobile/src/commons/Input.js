@@ -23,11 +23,7 @@ class Input extends PureComponent {
 					containerStyle,
 				]}
 			>
-				<TextInput
-					{...rest}
-					style={styles.input}
-					selectionColor={theme.color.green}
-				/>
+				<TextInput {...rest} style={styles.input} selectionColor={theme.color.green} />
 			</Box>
 		);
 	}

@@ -115,9 +115,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
 
 	console.log("navigation", navigation);
 
-	if (
-		NavigationService.getCurrentRouteName(navigation.state) === "ShoppingCart"
-	) {
+	if (NavigationService.getCurrentRouteName(navigation.state) === "ShoppingCart") {
 		tabBarVisible = false;
 	}
 
@@ -174,9 +172,7 @@ const AppNavigator = createSwitchNavigator(
 class Navigation extends Component {
 	state = {};
 	render() {
-		return (
-			<AppNavigator ref={(r) => NavigationService.setTopLevelNavigator(r)} />
-		);
+		return <AppNavigator ref={(r) => NavigationService.setTopLevelNavigator(r)} />;
 	}
 }
 

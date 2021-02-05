@@ -31,8 +31,8 @@ class SettingsScreen extends Component {
 	state = {};
 	render() {
 		return (
-			<Box f={1} center>
-				<StatusBar barStyle='light-content' />
+			<Box f={1} bg='white'>
+				<StatusBar barStyle='dark-content' />
 				<ScrollView>
 					{LINKS.map((el) => (
 						<ListColumn link={el.link} key={el.title}>

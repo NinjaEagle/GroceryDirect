@@ -58,20 +58,14 @@ class LoginScreen extends Component {
 		});
 		return (
 			<Box f={1} center bg='white'>
-				<BoxAnimated
-					style={{ flex: 1, transform: [{ translateY: logoTranslate }] }}
-				>
+				<BoxAnimated style={{ flex: 1, transform: [{ translateY: logoTranslate }] }}>
 					<Box f={1} center>
 						<OnboardingLogo />
 					</Box>
 				</BoxAnimated>
 
 				<BoxAnimated style={{ flex: 0.9, width: "100%", opacity }}>
-					<LoginButton
-						children='Continue with Google'
-						onPress={this.onGooglePress}
-						type='google'
-					/>
+					<LoginButton children='Continue with Google' onPress={this.onGooglePress} type='google' />
 					{/* <LoginButton type='google'>Continue with Google</LoginButton> */}
 					<LoginButton
 						children='Continue with Facebook'

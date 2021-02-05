@@ -33,7 +33,7 @@ class AddressesScreen extends Component {
 					You haven't added an address yet.
 				</Text>
 			</Box>
-			<Box w={1}>
+			<Box w='100%'>
 				<Button style={styles.button} onPress={this.handleAddAddressPress}>
 					<Text bold color='white'>
 						Add address
@@ -50,7 +50,7 @@ class AddressesScreen extends Component {
 		return (
 			<Box f={1} center bg='white' px='md'>
 				<StatusBar barStyle='dark-content' />
-				<Text>Hhello</Text>
+				<Text>Hello</Text>
 			</Box>
 		);
 	}
@@ -59,6 +59,7 @@ class AddressesScreen extends Component {
 const styles = StyleSheet.create({
 	button: {
 		backgroundColor: theme.color.green,
+		width: "90%",
 	},
 });
 
