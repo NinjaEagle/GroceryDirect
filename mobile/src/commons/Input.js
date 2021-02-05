@@ -10,7 +10,7 @@ class Input extends PureComponent {
 		const { containerStyle, ...rest } = this.props;
 		return (
 			<Box
-				w={1}
+				w='100%'
 				h={50}
 				p='xs'
 				radius={6}
