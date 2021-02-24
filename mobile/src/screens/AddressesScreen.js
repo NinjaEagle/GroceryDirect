@@ -51,7 +51,11 @@ class AddressesScreen extends Component {
 		return (
 			<Box f={1} center bg='white' px='md'>
 				<StatusBar barStyle='dark-content' />
-				<Text>Hello</Text>
+				{this.props.authStore.info.addresses.map((address) => (
+					<Box key={address._id}>
+						<Text>{address.street}</Text>
+					</Box>
+				))}
 			</Box>
 		);
 	}
