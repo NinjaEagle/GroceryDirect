@@ -75,6 +75,9 @@ const AddressFormStack = createStackNavigator(
 		AddressForm: {
 			getScreen: () => require("./AddressFormScreen").default,
 		},
+		AutocompleteAddress: {
+			getScreen: () => require("./AutocompleteAddressScreen").default,
+		},
 	},
 	{
 		navigationOptions: {
@@ -112,8 +115,6 @@ const HomeStack = createStackNavigator(
 
 HomeStack.navigationOptions = ({ navigation }) => {
 	let tabBarVisible = true;
-
-	console.log("navigation", navigation);
 
 	if (NavigationService.getCurrentRouteName(navigation.state) === "ShoppingCart") {
 		tabBarVisible = false;

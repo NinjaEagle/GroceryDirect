@@ -7,7 +7,7 @@ app.json
 
 # add an exception using ! to the preceding rule
 !package.json
-
+env.js
 .expo/*
 npm-debug.*
 TODO.md

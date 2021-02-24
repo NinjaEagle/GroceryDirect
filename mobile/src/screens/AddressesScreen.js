@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { StatusBar, StyleSheet } from "react-native";
 import { Box, Text } from "react-native-design-utility";
 import { EvilIcons } from "@expo/vector-icons";
-import { inject } from "mobx-react/native";
+import { inject, observer } from "mobx-react/native";
 
 import { theme } from "../constants/theme";
 import Button from "../commons/Button";
 
 @inject("authStore")
+@observer
 class AddressesScreen extends Component {
 	static navigationOptions = {
 		title: "Addresses",

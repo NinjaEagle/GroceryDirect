@@ -56,7 +56,6 @@ class HomeScreen extends Component {
 	separator = () => <Box h={2} bg='greyLighter' />;
 
 	render() {
-		console.log("Home Screen");
 		return (
 			<Box f={1}>
 				<StatusBar barStyle='light-content' />
