@@ -26,7 +26,8 @@ export const buildAddress = (address) =>
 			acc.postalCode = value;
 		}
 
-		if (current.types.includes("locality")) {
+		// if (current.types.includes("locality")) {
+		if (current.types.includes("neighborhood") || current.types.includes("locality")) {
 			acc.city = value;
 		}
 

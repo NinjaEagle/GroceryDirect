@@ -1,6 +1,5 @@
 import express from "express";
 import middlewaresConfig from "./config/middlewares";
-import { CustomerRoutes } from "./modules";
 import "./config/db";
 import { CustomerRoutes, AddressRoutes } from "./modules";
 
