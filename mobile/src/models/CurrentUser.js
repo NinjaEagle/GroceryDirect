@@ -1,4 +1,4 @@
-import { types, flow, getParent } from "mobx-state-tree";
+import { types, flow, getParent, destroy } from "mobx-state-tree";
 import get from "lodash.get";
 import { UserAddressModel } from "./UserAddresses";
 import { baseApi } from "../api/Api";
@@ -43,4 +43,7 @@ export const CurrentUserModel = types
 				throw error;
 			}
 		}),
+		removeAddress(address) {
+			destroy(address);
+		},
 	}));
