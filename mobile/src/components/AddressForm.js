@@ -4,6 +4,7 @@ import { Box, Text } from "react-native-design-utility";
 import { observer, inject } from "mobx-react/native";
 import { observable, action, computed } from "mobx";
 import get from "lodash.get";
+
 import CloseBtn from "../commons/CloseBtn";
 import Input from "../commons/Input";
 import Button from "../commons/Button";
@@ -13,11 +14,6 @@ import { buildAddress } from "../utils/buildAddress";
 @inject("authStore")
 @observer
 class AddressForm extends Component {
-	// static navigationOptions = ({ navigation }) => ({
-	// 	title: "Address",
-	// 	headerLeft: <CloseBtn left size={25} onPress={() => navigation.goBack(null)} />,
-	// });
-
 	@observable
 	address = get(this.props, "address", null);
 
@@ -48,12 +44,12 @@ class AddressForm extends Component {
 	@action.bound
 	searchAddress(value) {
 		this.props.navigation.goBack(null);
-		console.log("value", value);
 
 		const address = buildAddress(value);
 
 		this.address = address;
 	}
+
 	@action.bound
 	async saveAddress() {
 		this.isSaving = true;
@@ -66,6 +62,7 @@ class AddressForm extends Component {
 
 	render() {
 		const { editMode } = this.props;
+
 		if (this.isSaving) {
 			return (
 				<Box f={1} bg='white' center>
@@ -73,6 +70,7 @@ class AddressForm extends Component {
 				</Box>
 			);
 		}
+
 		return (
 			<Box f={1} bg='white' p='sm'>
 				<StatusBar barStyle='dark-content' />
@@ -111,6 +109,7 @@ class AddressForm extends Component {
 							{editMode ? "Edit" : "Save"}
 						</Text>
 					</Button>
+
 					{editMode && (
 						<Button
 							disabled={!this.address}

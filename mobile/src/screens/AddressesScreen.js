@@ -80,7 +80,7 @@ class AddressesScreen extends Component {
 					You haven't added an address yet.
 				</Text>
 			</Box>
-			<Box w={1}>
+			<Box w='100%'>
 				<Button style={styles.button} onPress={this.handleAddAddressPress}>
 					<Text bold color='white'>
 						Add address
