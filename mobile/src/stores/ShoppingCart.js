@@ -1,4 +1,4 @@
-import { types } from "mobx-state-tree";
+import { types, flow } from "mobx-state-tree";
 
 import { ProductModel } from "../models/Product";
 
@@ -18,6 +18,9 @@ export const ShoppingCartStore = types
 		get productsList() {
 			return self.products.slice();
 		},
+		get isEmpty() {
+			return self.products.length === 0;
+		},
 	}))
 	.actions((self) => ({
 		addProduct(product) {
@@ -26,6 +29,20 @@ export const ShoppingCartStore = types
 			if (!entry) {
 				self.products.push(product);
 			}
+		},
+		emptyCart() {
+			if (!self.isEmpty) {
+				self.products = undefined;
+			}
+		},
+		logout() {
+			flow(function* () {
+				try {
+					yield self.emptyCart();
+				} catch (e) {
+					console.log(e);
+				}
+			});
 		},
 		removeProduct(product) {
 			self.products = self.products.filter((el) => el.id !== product.id);

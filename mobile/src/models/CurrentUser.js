@@ -1,5 +1,6 @@
-import { types, flow, getParent } from "mobx-state-tree";
+import { types, flow, getParent, destroy } from "mobx-state-tree";
 import get from "lodash.get";
+
 import { UserAddressModel } from "./UserAddresses";
 import { baseApi } from "../api/Api";
 
@@ -28,19 +29,31 @@ export const CurrentUserModel = types
 					.post({ data })
 					.json();
 
-				if (typeof res.address === "object") {
-					const address = UserAddressModel.create({
-						...res.address,
-						geo: {
-							lng: get(res.address, ["geo", "coords", 0]),
-							lat: get(res.address, ["geo", "coords", 1]),
-						},
-					});
-
-					self.addresses.push(address);
+				if (res.address) {
+					self.addresses.push(res.address);
 				}
 			} catch (error) {
 				throw error;
 			}
 		}),
+
+		getAddresses: flow(function* () {
+			try {
+				const res = yield baseApi
+					.url("/addresses")
+					.auth(`Bearer ${self.auth.authToken}`)
+					.get()
+					.json();
+
+				if (Array.isArray(res.addresses)) {
+					self.addresses = res.addresses;
+				}
+			} catch (error) {
+				throw error;
+			}
+		}),
+
+		removeAddress(address) {
+			destroy(address);
+		},
 	}));
