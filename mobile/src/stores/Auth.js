@@ -4,7 +4,7 @@ import { customersApi } from "../api/Api";
 import { NavigationService } from "../api/NavigationService";
 import { CurrentUserModel } from "../models/CurrentUser";
 
-const TOKEN_KEY = "@instore/token";
+const TOKEN_KEY = "@grocerydirect/token";
 
 export const AuthStore = types
 	.model("AuthStore", {
@@ -31,6 +31,13 @@ export const AuthStore = types
 		saveToken: flow(function* (token) {
 			try {
 				yield AsyncStorage.setItem(TOKEN_KEY, token);
+			} catch (error) {
+				console.log("error", error);
+			}
+		}),
+		deleteToken: flow(function* () {
+			try {
+				yield AsyncStorage.removeItem(TOKEN_KEY);
 			} catch (error) {
 				console.log("error", error);
 			}
@@ -64,9 +71,19 @@ export const AuthStore = types
 					yield self.saveToken(res.token);
 					yield self.getUserInfo();
 				}
-				// console.log('result', res)
 			} catch (error) {
 				console.log("error", error);
+			}
+		}),
+		logout: flow(function* () {
+			try {
+				if (self.authToken) {
+					yield self.deleteToken();
+					self.authToken = undefined;
+					self.info = undefined;
+				}
+			} catch (error) {
+				console.log(error);
 			}
 		}),
 	}));

@@ -5,7 +5,6 @@ import { observer, inject } from "mobx-react/native";
 import { observable, action, computed } from "mobx";
 import get from "lodash.get";
 
-import CloseBtn from "../commons/CloseBtn";
 import Input from "../commons/Input";
 import Button from "../commons/Button";
 import { theme } from "../constants/theme";

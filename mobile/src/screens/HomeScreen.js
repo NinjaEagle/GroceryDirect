@@ -33,7 +33,7 @@ const NUM_COLUMNS = 3;
 
 class HomeScreen extends Component {
 	static navigationOptions = {
-		title: "InStore",
+		title: "GroceryDirect",
 		gestureEnabled: "true",
 		headerLeft: <ProfileBtn />,
 	};

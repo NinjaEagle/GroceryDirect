@@ -8,7 +8,7 @@ export const create = async (req, res) => {
 	const schema = Yup.object().shape({
 		street: Yup.string().required(),
 		aptNum: Yup.string(),
-		postalCode: Yup.string().min(6).required(),
+		postalCode: Yup.string().min(5).required(),
 		city: Yup.string().required(),
 		province: Yup.string().required(),
 		instructions: Yup.string(),

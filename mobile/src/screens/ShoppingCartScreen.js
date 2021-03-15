@@ -11,9 +11,7 @@ import { theme } from "../constants/theme";
 class ShoppingCartScreen extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: "My Cart",
-		headerLeft: (
-			<CloseBtn left size={30} onPress={() => navigation.goBack(null)} />
-		),
+		headerLeft: <CloseBtn left size={30} onPress={() => navigation.goBack(null)} />,
 	});
 	state = {};
 
@@ -34,7 +32,6 @@ class ShoppingCartScreen extends Component {
 
 		//FlatList components requires an Array, MobX provides us with an ObservableArray
 		// console.log('products', shoppingCartStore.products);
-		// console.log('productList', shoppingCartStore.productsList)
 		return (
 			<FlatList
 				data={shoppingCartStore.productsList}

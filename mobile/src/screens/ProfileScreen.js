@@ -1,19 +1,9 @@
 import React, { Component } from "react";
-import {
-	StatusBar,
-	ScrollView,
-	Image,
-	TouchableOpacity,
-	StyleSheet,
-} from "react-native";
+import { StatusBar, ScrollView, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { Box, Text } from "react-native-design-utility";
 import { inject } from "mobx-react/native";
-import {
-	MaterialIcons,
-	EvilIcons,
-	Ionicons,
-	Feather,
-} from "@expo/vector-icons";
+import { MaterialIcons, EvilIcons, Ionicons, Feather } from "@expo/vector-icons";
+import { NavigationService } from "../api/NavigationService";
 
 import CloseBtn from "../commons/CloseBtn";
 import ListColumn from "../commons/ListColumn";
@@ -48,14 +38,21 @@ const LINKS = [
 ];
 
 @inject("authStore")
+@inject("shoppingCartStore")
+@inject("productsStore")
 class ProfileScreen extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: "My Profile",
-		headerLeft: (
-			<CloseBtn left size={25} onPress={() => navigation.goBack(null)} />
-		),
+		headerLeft: <CloseBtn left size={25} onPress={() => navigation.goBack(null)} />,
 	});
 	state = {};
+	logOut = async () => {
+		await this.props.authStore.logout();
+		await this.props.shoppingCartStore.logout();
+		await this.props.productsStore.logout();
+		NavigationService.navigate("Splash");
+	};
+
 	render() {
 		const { authStore } = this.props;
 		return (
@@ -91,7 +88,7 @@ class ProfileScreen extends Component {
 						</ListColumn>
 					))}
 
-					<TouchableOpacity style={styles.logoutBtn}>
+					<TouchableOpacity style={styles.logoutBtn} onPress={this.logOut}>
 						<Text bold color='green'>
 							Log out
 						</Text>

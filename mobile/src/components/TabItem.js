@@ -1,19 +1,18 @@
-import React, { PureComponent } from 'react'
-import { Image, TouchableOpacity, StyleSheet } from 'react-native'
-import { Box, Text } from 'react-native-design-utility'
+import React, { PureComponent } from "react";
+import { Image, TouchableOpacity, StyleSheet } from "react-native";
+import { Box, Text } from "react-native-design-utility";
 
-import { tabBarIcons } from '../constants/images'
+import { tabBarIcons } from "../constants/images";
 
 class TabItem extends PureComponent {
 	handlePress = () => {
-		this.props.navigation.navigate(this.props.routeName)
-	}
+		this.props.navigation.navigate(this.props.routeName);
+	};
 
 	render() {
-		const { routeName, isActive } = this.props
+		const { routeName, isActive } = this.props;
 
-		const icon = tabBarIcons[isActive ? 'active' : 'inactive'][routeName]
-		// console.log(icon)
+		const icon = tabBarIcons[isActive ? "active" : "inactive"][routeName];
 		return (
 			<Box f={1} pt={10}>
 				<TouchableOpacity onPress={this.handlePress} style={styles.button}>
@@ -27,16 +26,16 @@ class TabItem extends PureComponent {
 					</Box>
 				</TouchableOpacity>
 			</Box>
-		)
+		);
 	}
 }
 
 const styles = StyleSheet.create({
 	button: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
+		justifyContent: "center",
+		alignItems: "center",
 	},
-})
+});
 
-export default TabItem
+export default TabItem;

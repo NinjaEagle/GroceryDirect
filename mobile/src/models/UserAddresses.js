@@ -31,7 +31,7 @@ export const UserAddressModel = types
 	}))
 	.actions((self) => ({
 		update(newData) {
-			console.log("newData", newData);
+			// console.log("newData", newData);
 
 			applySnapshot(self, newData);
 		},
@@ -42,8 +42,6 @@ export const UserAddressModel = types
 					.auth(`Bearer ${self.user.auth.authToken}`)
 					.put({ data })
 					.json();
-
-				console.log("res", res);
 
 				if (res.address) {
 					self.update(res.address);
