@@ -3,6 +3,8 @@
 ## Tech
 Built with React Native, MongoDB, Express, Mobx-State-Tree, React-Native-Design-Utility, Expo, React-Navigation
 
+## Walkthrough
+<img src='misc/grocerydirect.gif' title='Main User Flow' alt='Main Walkthrough' />
 
 ## User Stories
 - [x] Create a Splash Screen and add Animation to it.
