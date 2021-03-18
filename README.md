@@ -1,4 +1,4 @@
-# Grocery Direct React Native Mobile App
+# Grocery Direct Mobile App
 
 ## Tech
 Built with React Native, MongoDB, Express, Mobx-State-Tree, React-Native-Design-Utility, Expo, React-Navigation
