@@ -7,7 +7,7 @@
 		"dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js"
 	},
 	"dependencies": {
-		"axios": "0.18.0",
+		"axios": "0.21.2",
 		"express": "4.16.3",
 		"jsonwebtoken": "8.3.0",
 		"mongoose": "5.7.5",
